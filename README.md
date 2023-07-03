@@ -5,7 +5,7 @@ Tutorial Address https://docs.streamlit.io/library/get-started
 
 1. Create **a repository** on GitHub
 2. Add following files:
-   - Streamlit**app.py**
+   - Streamlit **app.py**
    - **requirements.txt**
 
 
