@@ -1,9 +1,9 @@
 # deployApp
 
-# Deploy Tutorial
+## Deploy Tutorial
 
 
-# Deploy on Heroku
+## Deploy on Heroku
 
 
-# Deploy streamlit on streamlit cloud
+## Deploy streamlit on streamlit cloud
