@@ -3,7 +3,7 @@
 import streamlit as st
 import pymongo
 st.write('Start')
-client = pymongo.MongoClient("mongodb+srv://zcglook:OINbHLNnoSuvCjnud@cluster0.lfgvy2a.mongodb.net/?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://z@cluster0.lfgvy2a.mongodb.net/?retryWrites=true&w=majority")
 st.write('Entry')
 try:
     client.admin.command('ping')
