@@ -27,5 +27,5 @@ except Exception as e:
     st.write(e)
 
 with st.sidebar:
-    db = st.selectbox('Database', client.list_database_names())
-    st.write(db.list_collection_names())
+    db_name = st.selectbox('Database', client.list_database_names())
+    st.write(client[db_name].list_collection_names())
