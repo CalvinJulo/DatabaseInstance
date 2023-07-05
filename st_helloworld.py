@@ -5,9 +5,8 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
 with st.sidebar:
-    if st.button('Altas'):
-        Username = st.text_input('Username','calvinish')
-        Password = st.text_input('password','kKS8NAQmdgSqT1c8')
+    Username = st.text_input('Username','calvinish')
+    Password = st.text_input('password','kKS8NAQmdgSqT1c8')
     uri = f"mongodb+srv://{Username}:{Password}@cluster0.f8fu9.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
