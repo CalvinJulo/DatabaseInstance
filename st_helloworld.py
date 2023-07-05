@@ -28,3 +28,8 @@ except Exception as e:
 with st.sidebar:
     db_name = st.selectbox('Database', client.list_database_names())
     st.write(client[db_name].list_collection_names())
+
+col_name = st.text_input('Collection_name','')
+query = st.text_input('Query', '')
+info = client[db_name][col_name].find(query)
+st.write(info)
