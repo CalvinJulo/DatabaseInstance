@@ -14,12 +14,12 @@ def init_connection():
     return MongoClient(uri, server_api=ServerApi('1'))
 
 client = init_connection()
+for i in client.list_database_names():
+    st.write(i, client[i].list_collection_names())
 
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
     st.write("Pinged your deployment. You successfully connected to MongoDB!")
-    for i in client.list_database_names():
-        st.write(i, client[i].list_collection_names())
 except Exception as e:
     st.write(e)
