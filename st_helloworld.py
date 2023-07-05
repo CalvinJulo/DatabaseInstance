@@ -34,4 +34,4 @@ query = st.text_input('Query', '')
 doc_list = client[db_name][col_name].find()
 doc_list = list(doc_list)
 for i in doc_list:
-    print(i)
+    st.write(i)
