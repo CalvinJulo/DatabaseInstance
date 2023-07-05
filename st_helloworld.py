@@ -38,7 +38,7 @@ def get_col():
     items =  client[db_name][col_name].find()
     items = list(items)  # make hashable for st.cache_data
     return items
-
-st.write('xin')
-keys = set(key for dict_ in get_col() for key in dict_.keys())
+info = get_col()
+st.write('xin1')
+keys = set(key for dict_ in info for key in dict_.keys())
 st.write(list(keys))
