@@ -39,6 +39,7 @@ def get_col():
     items = list(items)  # make hashable for st.cache_data
     return items
 info = get_col()
-st.write('xin1')
+st.write('xin2')
 keys = set(key for dict_ in info for key in dict_.keys())
 st.write(list(keys))
+st.dataframe(info[:10])
