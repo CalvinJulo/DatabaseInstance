@@ -31,5 +31,6 @@ with st.sidebar:
 
 col_name = st.text_input('Collection_name','')
 query = st.text_input('Query', '')
-key_list = client[db_name][col_name].distinct("", {})
+field = client[db_name][col_name].distinct('')
 st.write('xin')
+st.write(field)
