@@ -31,5 +31,5 @@ with st.sidebar:
 
 col_name = st.text_input('Collection_name','')
 query = st.text_input('Query', '')
-info = client[db_name][col_name].find(query)
+info = client[db_name][col_name].find()
 st.write(info)
