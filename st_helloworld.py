@@ -30,7 +30,14 @@ with st.sidebar:
     st.write(client[db_name].list_collection_names())
 
 col_name = st.text_input('Collection_name','')
-query = st.text_input('Query', '')
-field = client[db_name][col_name].distinct('')
+
+# Pull data from the collection.
+# Uses st.cache_data to only rerun when the query changes or after 10 min.
+@st.cache_data(ttl=600)
+def get_col():
+    items =  client[db_name][col_name].find()
+    items = list(items)  # make hashable for st.cache_data
+    return items
+
 st.write('xin')
-st.write(col_name)
+st.dataframe(get_col())
