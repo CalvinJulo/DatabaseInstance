@@ -40,4 +40,5 @@ def get_col():
     return items
 
 st.write('xin')
-st.dataframe(get_col())
+keys = set(key for dict_ in get_col() for key in dict_.keys())
+st.write(list(keys))
