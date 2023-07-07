@@ -43,3 +43,9 @@ st.write('xin2')
 keys = set(key for dict_ in info for key in dict_.keys())
 st.write(list(keys))
 st.dataframe(info)
+value_name = st.text_input('value_name','')
+values = []
+for i in info:
+    values.append(i[value_name])
+st.dataframe(values)
+    
