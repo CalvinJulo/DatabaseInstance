@@ -33,7 +33,7 @@ col_name = st.text_input('Collection_name','')
 
 # Pull data from the collection.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
-@st.cache_data(ttl=600)
+# @st.cache_data(ttl=600)
 def get_col():
     items =  client[db_name][col_name].find()
     items = list(items)  # make hashable for st.cache_data
