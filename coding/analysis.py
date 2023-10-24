@@ -14,14 +14,15 @@ import pandas as pd
 
 # show the description of df
 def df_des(df):
-    des = pd.DataFrame()
+    des = []
     for i in df.columns:
         name_dict = dict()
         name_dict['name'] = i
         name_dict['type'] = df[i].dtype
         name_dict['example'] = df[i][0]
         name_dict['num'] = df[i].count()
-        des = des.append(name_dict, ignore_index=True)
+        des.append(name_dict)
+    des = pd.DataFrame(des)
     return des
 
 
