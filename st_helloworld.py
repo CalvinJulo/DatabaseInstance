@@ -1,51 +1,60 @@
-# coding=utf-8
+# !/usr/bin/env python
+# -*-coding:utf-8 -*-
 
+"""
+# File       : xx.py
+# Time       ：2021/9/11 19:02
+# Author     ：
+# version    ：python 3.9
+# Description：
+"""
+# CMD Run Command ： streamlit run /Users/xx.py --server.port 8501
+
+import pandas as pd
 import streamlit as st
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
+from coding import input_sample
+from coding import analysis
 
 with st.sidebar:
-    Username = st.text_input('Username','calvinish')
-    Password = st.text_input('password','kKS8NAQmdgSqT1c8')
-    uri = f"mongodb+srv://{Username}:{Password}@cluster0.f8fu9.mongodb.net/?retryWrites=true&w=majority"
+    Username = st.text_input('Username', 'calvinish')
+    Password = st.text_input('password', 'kKS8NAQmdgSqT1c8')
 
-# Create a new client and connect to the server
-# Initialize connection.
+
 # Uses st.cache_resource to only run once.
 @st.cache_resource
-def init_connection():
-    return MongoClient(uri, server_api=ServerApi('1'))
+def get_mongo():
+    return input_sample.get_mongodb(Username, Password)
 
-client = init_connection()
 
-# Send a ping to confirm a successful connection
-try:
-    client.admin.command('ping')
-    st.write("Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    st.write(e)
+@st.cache_resource
+def get_col(db, col):
+    items = client[db][col].find()
+    items = list(items)
+    return items
 
+
+client = get_mongo()
 with st.sidebar:
     db_name = st.selectbox('Database', client.list_database_names())
-    st.write(client[db_name].list_collection_names())
+    col_name = st.selectbox('Collection', client[db_name].list_collection_names())
+    #if st.button('Renew'):
+    #    get_col.clear()
+    st.write('current_db:', db_name)
+    st.write('current_col:', col_name)
 
-col_name = st.text_input('Collection_name','')
+data = get_col(db_name, col_name)
+df = pd.DataFrame(data)
 
-# Pull data from the collection.
-# Uses st.cache_data to only rerun when the query changes or after 10 min.
-# @st.cache_data(ttl=600)
-def get_col():
-    items =  client[db_name][col_name].find()
-    items = list(items)  # make hashable for st.cache_data
-    return items
-info = get_col()
+st.dataframe(df.head())
+des = analysis.df_des(df)
+st.dataframe(des)
+
 st.write('xin2')
-keys = set(key for dict_ in info for key in dict_.keys())
+keys = set(key for dict_ in data for key in dict_.keys())
 st.write(list(keys))
-st.dataframe(info)
 value_name = st.text_input('value_name','')
 values = []
-for i in info:
+for i in data:
     values.append(i[value_name])
 st.dataframe(values)
-    
+
