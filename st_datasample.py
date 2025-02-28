@@ -20,34 +20,33 @@ import streamlit as st
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-# uri = "mongodb+srv://mongo00:HgvVqbWtSikGEJKW@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-uri = "mongodb+srv://mongo01:k78Zcoy3CSxL3Dfo@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-# Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
+with st.sidebar:
+    Username = st.text_input('Username', 'mongo01')
+    Password = st.text_input('password', 'k78Zcoy3CSxL3Dfo')
 
-# Send a ping to confirm a successful connection
-try:
-    client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
-    st.write('Pinged your deployment. You successfully connected to MongoDB!')
-except Exception as e:
-    print(e)
-    st.write('Fail connect')
+
+
+
 
 st.write('hello, this is test')
-
-'''
-with st.sidebar:
-    Username = st.text_input('Username', 'calvinish')
-    Password = st.text_input('password', 'kKS8NAQmdgSqT1c8')
-
 
 # Uses st.cache_resource to only run once.
 @st.cache_resource
 def get_mongo():
-    return input_sample.get_mongodb(Username, Password)
-
+    # uri = "mongodb+srv://mongo00:HgvVqbWtSikGEJKW@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    uri = "mongodb+srv://mongo01:k78Zcoy3CSxL3Dfo@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    # Create a new client and connect to the server
+    client = MongoClient(uri, server_api=ServerApi('1'))
+    # Send a ping to confirm a successful connection
+    try:
+        client.admin.command('ping')
+        print("Pinged your deployment. You successfully connected to MongoDB!")
+        st.write('Pinged your deployment. You successfully connected to MongoDB!')
+    except Exception as e:
+        print(e)
+        st.write('Fail connect')
+    return client
 
 @st.cache_resource
 def get_col(db, col):
@@ -80,4 +79,3 @@ values = []
 for i in data:
     values.append(i[value_name])
 st.dataframe(values)
-'''
