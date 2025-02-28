@@ -74,14 +74,18 @@ with st.sidebar:
     st.write('current_col:', col_name)
 
 
+# Show the collection info in DataFrame
+St.write(db_name, col_name)
 data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
 
+# Show the example of item
+St.write('Item example')
 st.dataframe(df.head())
 des = df_des(df)
 st.dataframe(des)
 
-st.write('xin2')
+st.write('Collection's key')
 keys = set(key for dict_ in data for key in dict_.keys())
 st.write(list(keys))
 value_name = st.text_input('value_name','')
