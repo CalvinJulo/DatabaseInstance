@@ -63,7 +63,7 @@ def df_des(df):
     des = pd.DataFrame(des)
     return des
 
-
+# Show the Database and its Collection from the MongoDB
 client = get_mongo()
 with st.sidebar:
     db_name = st.selectbox('Database', client.list_database_names())
@@ -72,6 +72,7 @@ with st.sidebar:
     #    get_col.clear()
     st.write('current_db:', db_name)
     st.write('current_col:', col_name)
+
 
 data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
