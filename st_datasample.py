@@ -80,7 +80,7 @@ data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
 
 # Show the example of item
-St.write('Item example')
+st.write('Item example')
 st.dataframe(df.head())
 des = df_des(df)
 st.dataframe(des)
