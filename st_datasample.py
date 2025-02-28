@@ -85,7 +85,7 @@ st.dataframe(df.head())
 des = df_des(df)
 st.dataframe(des)
 
-st.write('Collection's key')
+st.write('Collection keys')
 keys = set(key for dict_ in data for key in dict_.keys())
 st.write(list(keys))
 value_name = st.text_input('value_name','')
