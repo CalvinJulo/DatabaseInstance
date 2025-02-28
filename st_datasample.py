@@ -32,6 +32,7 @@ try:
     st.write('Pinged your deployment. You successfully connected to MongoDB!')
 except Exception as e:
     print(e)
+    st.write('Fail connect')
 
 st.write('hello, this is test')
 
