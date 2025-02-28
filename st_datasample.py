@@ -50,6 +50,19 @@ def get_col(db, col):
     items = list(items)
     return items
 
+# show the description of df
+def df_des(df):
+    des = []
+    for i in df.columns:
+        name_dict = dict()
+        name_dict['name'] = i
+        name_dict['type'] = df[i].dtype
+        name_dict['example'] = df[i][0]
+        name_dict['num'] = df[i].count()
+        des.append(name_dict)
+    des = pd.DataFrame(des)
+    return des
+
 
 client = get_mongo()
 with st.sidebar:
@@ -64,7 +77,7 @@ data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
 
 st.dataframe(df.head())
-des = analysis.df_des(df)
+des = df_des(df)
 st.dataframe(des)
 
 st.write('xin2')
