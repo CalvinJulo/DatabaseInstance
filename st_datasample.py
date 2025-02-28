@@ -16,7 +16,6 @@ import streamlit as st
 # from coding import analysis
 
 
-
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -24,9 +23,6 @@ from pymongo.server_api import ServerApi
 with st.sidebar:
     Username = st.text_input('Username', 'mongo01')
     Password = st.text_input('password', 'k78Zcoy3CSxL3Dfo')
-
-
-
 
 
 st.write('hello, this is test')
