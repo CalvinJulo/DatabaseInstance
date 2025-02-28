@@ -75,7 +75,7 @@ with st.sidebar:
 
 
 # Show the collection info in DataFrame
-St.write(db_name, col_name)
+st.write(db_name, col_name)
 data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
 
