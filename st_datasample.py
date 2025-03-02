@@ -129,3 +129,11 @@ with tab2:
     if drop_col:
         db[drop_col].drop()
 
+with tab3:
+    st.write(col.full_name)
+    st.write(col.name)
+    st.write(col.count_documents())
+    rename_col= st.text_input("Rename a collection")
+    if rename_col:
+        col.rename("rename_col")
+    
