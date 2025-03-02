@@ -112,8 +112,8 @@ with tab1:
     new_db_name = st.text_input("Add a new db name", )
     if new_db_name:
         new_db = client.new_db_name # Reference a new database (it will be created when data is inserted)
-        collection = db.new_collection # Create a collection and insert a document to create the database
-        collection.insert_one({"message": "Hello, MongoDB!"}) 
+        new_col = new_db.new_col_name # Create a collection and insert a document to create the database
+        new_col.insert_one({"message": "Hello, MongoDB!"}) 
         st.write(client.list_database_names())
     drop_db = st.text_input("Drop a db name", )
     if drop_db:
