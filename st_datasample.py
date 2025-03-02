@@ -46,18 +46,18 @@ def get_mongo():
 
 @st.cache_resource
 def get_col(db, col):
-    items = client[db][col].find()
-    items = list(items)
-    return items
+    documents = client[db][col].find()
+    documents = list(documents)
+    return documents
 
 # show the description of df
 def df_des(df):
     des = []
     for i in df.columns:
         name_dict = dict()
-        name_dict['name'] = i
+        name_dict['field'] = i
         name_dict['type'] = df[i].dtype
-        name_dict['example'] = df[i][0]
+        name_dict['value'] = df[i][0]
         name_dict['num'] = df[i].count()
         des.append(name_dict)
     des = pd.DataFrame(des)
@@ -79,13 +79,16 @@ st.write(db_name, col_name)
 data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
 
-# Show the example of item
-st.write('Item example')
+# Show the example of documents
+st.write('The head documents')
 st.dataframe(df.head())
+
+# Show the stucture of documents
+st.write('The documents structure')
 des = df_des(df)
 st.dataframe(des)
 
-st.write('Collection keys')
+st.write('Collection field')
 keys = set(key for dict_ in data for key in dict_.keys())
 st.write(list(keys))
 value_name = st.text_input('value_name','')
