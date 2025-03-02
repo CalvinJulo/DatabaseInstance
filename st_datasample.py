@@ -109,16 +109,25 @@ with tab1:
     # st.write(client.server_info())
     # st.write(client.watch())
     st.write(client.list_database_names())
-    new_db_name = st.text_input("Add a new db name", )
+    new_db_name = st.text_input("Add a new db name", 'Enter the new db name')
     if new_db_name:
         new_db = client[new_db_name] # Reference a new database (it will be created when data is inserted)
         new_col = new_db.new_col_name # Create a collection and insert a document to create the database
         new_col.insert_one({"message": "Hello, MongoDB!"}) 
         st.write(client.list_database_names())
-    drop_db = st.text_input("Drop a db name", )
+    drop_db = st.text_input("Drop a db",'Enter the db name' )
     if drop_db:
         client.drop_database(drop_db)
 with tab2:
     st.write(db.name)
     # st.write(db.watch())
     st.write(db.list_collection_names())
+    new_col_name = st.text_input("Add a new collection name", 'Enter the new collection name')
+    if new_col_name:
+        new_col = db[new_col_name] 
+        # new_col.insert_one({"message": "Hello, MongoDB!"}) 
+        st.write(db.list_collection_names())
+    drop_col= st.text_input("Drop a collection",'Enter the collection name' )
+    if drop_col:
+        db[drop_col].drop()
+
