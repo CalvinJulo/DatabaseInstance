@@ -106,11 +106,16 @@ st.dataframe(values)
 tab1, tab2, tab3 = st.tabs(["Client", "DB", "Col"])
 
 with tab1:
-    st.write(client.server_info())
-    st.write(client.watch())
+    # st.write(client.server_info())
+    # st.write(client.watch())
     st.write(client.list_database_names())
+    new_db_name = st.text_input("Add a new db name", )
+    if new_db_name:
+        new_db = client[new_db_name]
+    drop_db = st.text_input("Drop a db name", )
+    if drop_db:
+        client.drop_database(drop_db)
 with tab2:
-    db = client[db_name]
     st.write(db.name)
-    st.write(db.watch())
+    # st.write(db.watch())
     st.write(db.list_collection_names())
