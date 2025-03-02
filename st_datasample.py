@@ -76,6 +76,7 @@ with st.sidebar:
 st.write('##', db_name, col_name)
 db = client[db_name]
 col = db[col_name]
+client['db1']['col2'].insert_one({"message": "Hello, MongoDB!"})
 docs = get_col(db_name, col_name)
 docs_df = pd.DataFrame(docs)
 
