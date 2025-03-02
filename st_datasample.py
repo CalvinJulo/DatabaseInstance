@@ -96,12 +96,12 @@ keys = set(key for dict_ in docs for key in dict_.keys())
 st.write(list(keys))
 
 # Show the field value
-st.write('### The value of Field')
-value_name = st.text_input('value_name',list(keys)[0])
-values = []
-for i in docs:
-    values.append(i[value_name])
-st.dataframe(values)
+#st.write('### The value of Field')
+#value_name = st.text_input('value_name',list(keys)[0])
+#values = []
+#for i in docs:
+#    values.append(i[value_name])
+#st.dataframe(values)
 
 # Edit the docs
 
