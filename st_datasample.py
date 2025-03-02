@@ -115,7 +115,7 @@ with tab1:
         new_col = new_db.new_col_name # Create a collection and insert a document to create the database
         new_col.insert_one({"message": "Hello, MongoDB!"}) 
         st.write(client.list_database_names())
-    drop_db = st.text_input("Drop a db",'Enter the db name' )
+    drop_db = st.text_input("Drop a db")
     if drop_db:
         client.drop_database(drop_db)
 with tab2:
@@ -127,7 +127,7 @@ with tab2:
         new_col = db[new_col_name] 
         # new_col.insert_one({"message": "Hello, MongoDB!"}) 
         st.write(db.list_collection_names())
-    drop_col= st.text_input("Drop a collection",'Enter the collection name' )
+    drop_col= st.text_input("Drop a collection")
     if drop_col:
         db[drop_col].drop()
 
