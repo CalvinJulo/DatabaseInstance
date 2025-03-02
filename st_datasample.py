@@ -51,7 +51,7 @@ def get_col(db, col):
     return documents
 
 # show the description of df of documents
-def get_doc_df_des(df):
+def get_docs_df_des(df):
     des = []
     for i in df.columns:
         name_dict = dict()
@@ -76,32 +76,55 @@ with st.sidebar:
 st.write('##', db_name, col_name)
 db = client[db_name]
 col = db[col_name]
-data = get_col(db_name, col_name)
-df = pd.DataFrame(data)
+docs = get_col(db_name, col_name)
+docs_df = pd.DataFrame(docs)
 
 # Show the example of documents
 st.write('### The head documents')
-st.dataframe(df.head())
+st.dataframe(docs_df.head())
 
 # Show the structure of documents
 st.write('### The documents structure')
-des = get_doc_df_des(df)
+des = get_doc_df_des(docs_df)
 st.dataframe(des)
 
 
 # Show the Document field
 st.write('### The field of Documents')
-keys = set(key for dict_ in data for key in dict_.keys())
+keys = set(key for dict_ in docs for key in dict_.keys())
 st.write(list(keys))
 
 # Show the field value
 st.write('### The value of Field')
 value_name = st.text_input('value_name','')
 values = []
-for i in data:
+for i in docs:
     values.append(i[value_name])
 st.dataframe(values)
 
+# Edit the docs
+
+for doc in docs:
+    doc["id_str"] = str(doc["_id"])
+
+# Display the DataFrame in a data editor for user editing
+edited_docs_df = st.data_editor("Edit the documents below:", docs_df, num_rows="dynamic")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# edit client, database, collection
 
 tab1, tab2, tab3 = st.tabs(["Client", "DB", "Col"])
 
@@ -120,8 +143,8 @@ with tab1:
 with tab2:
     st.write(db.name)
     # st.write(db.watch())
-    db_stats = db.command("dbStats")
-    st.write(db_stats)
+    # db_stats = db.command("dbStats")
+    # st.write(db_stats)
     st.write(db.list_collection_names())
     new_col_name = st.text_input("Add a new collection name")
     if new_col_name:
