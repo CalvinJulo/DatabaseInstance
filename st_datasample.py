@@ -125,10 +125,11 @@ if st.button("Update Database"):
     # Iterate over rows in the edited DataFrame
     for index, row in edited_docs_df.iterrows():
         # Get the document _id and convert it back to an ObjectId
-        # doc_id_str = row["_id"]
+        doc_id = row["_id"]
         # try:
         #    doc_id = ObjectId(doc_id_str)
-
+        st.write(index)
+        st.write(row)
         
         # Prepare the update data (exclude the _id field)
         update_data = row.to_dict()
