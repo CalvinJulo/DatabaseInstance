@@ -139,8 +139,8 @@ if st.button("Update Database"):
         st.write('after pop')
         st.write(update_data)
         # Update the document in MongoDB
-        # result = collection.update_one({"_id": doc_id}, {"$set": update_data})
-        # st.write(f"Row {index} updated; modified count: {result.modified_count}")
+        result = col.update_one({"_id": doc_id}, {"$set": update_data})
+        st.write(f"Row {index} updated; modified count: {result.modified_count}")
 
     st.success("Database updated successfully!")
 
