@@ -15,7 +15,7 @@ import streamlit as st
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-
+# Username and password from MongoDB Altas
 with st.sidebar:
     Username = st.text_input('Username', 'mongo01')
     Password = st.text_input('password', 'k78Zcoy3CSxL3Dfo')
@@ -23,7 +23,9 @@ with st.sidebar:
 
 st.write('hello, this is test')
 
-# Uses st.cache_resource to only run once.
+# Create a new client and connect to the server
+# Initialize connection. And return the client
+# And should ensure it only run once.
 @st.cache_resource
 def get_mongo():
     uri = "mongodb+srv://mongo01:k78Zcoy3CSxL3Dfo@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
@@ -35,14 +37,17 @@ def get_mongo():
         print("Pinged your deployment. You successfully connected to MongoDB!")
         st.write('Pinged your deployment. You successfully connected to MongoDB!')
     except Exception as e:
-        print(e)
+        print(e, 'Fail connect')
         st.write('Fail connect')
     return client
 
+
+# Pull data from the collection.
+# Uses st.cache_data to only rerun when the query changes or after 10 min.
 @st.cache_resource
 def get_col(db, col):
     documents = client[db][col].find()
-    documents = list(documents)
+    documents = list(documents) # make hashable for st.cache_data
     return documents
 
 # show the description of df
@@ -81,9 +86,14 @@ st.write('### The documents structure')
 des = df_des(df)
 st.dataframe(des)
 
+
+# Show the Document field
 st.write('### Documents field')
 keys = set(key for dict_ in data for key in dict_.keys())
 st.write(list(keys))
+
+# Show the field value
+st.write('### field value')
 value_name = st.text_input('value_name','')
 values = []
 for i in data:
