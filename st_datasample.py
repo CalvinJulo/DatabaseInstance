@@ -75,20 +75,20 @@ with st.sidebar:
 
 
 # Show the collection info in DataFrame
-st.write(db_name, col_name)
+st.write('##', db_name, col_name)
 data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
 
 # Show the example of documents
-st.write('The head documents')
+st.write('### The head documents')
 st.dataframe(df.head())
 
 # Show the stucture of documents
-st.write('The documents structure')
+st.write('### The documents structure')
 des = df_des(df)
 st.dataframe(des)
 
-st.write('Collection field')
+st.write('### Documents field')
 keys = set(key for dict_ in data for key in dict_.keys())
 st.write(list(keys))
 value_name = st.text_input('value_name','')
