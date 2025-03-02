@@ -50,7 +50,7 @@ def get_col(db, col):
     documents = list(documents) # make hashable for st.cache_data
     return documents
 
-# show the description of df
+# show the description of df of documents
 def df_des(df):
     des = []
     for i in df.columns:
