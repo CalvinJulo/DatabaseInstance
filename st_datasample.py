@@ -134,7 +134,6 @@ with tab2:
 with tab3:
     st.write(col.full_name)
     st.write(col.name)
-    st.write(col.count_documents())
     # col_stats = db.command("collStats", col.name)
     # st.write(col_stats)
     rename_col= st.text_input("Rename a collection")
