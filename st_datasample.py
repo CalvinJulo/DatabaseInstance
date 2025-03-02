@@ -86,7 +86,7 @@ st.dataframe(docs_df.head())
 
 # Show the structure of documents
 st.write('### The documents structure')
-des = get_doc_df_des(docs_df)
+des = get_docs_df_des(docs_df)
 st.dataframe(des)
 
 
