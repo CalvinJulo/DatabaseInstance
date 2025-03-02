@@ -88,12 +88,12 @@ st.dataframe(des)
 
 
 # Show the Document field
-st.write('### Documents field')
+st.write('### The field of Documents')
 keys = set(key for dict_ in data for key in dict_.keys())
 st.write(list(keys))
 
 # Show the field value
-st.write('### field value')
+st.write('### The value of Field')
 value_name = st.text_input('value_name','')
 values = []
 for i in data:
