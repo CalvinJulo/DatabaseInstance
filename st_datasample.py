@@ -51,7 +51,7 @@ def get_col(db, col):
     return documents
 
 # show the description of df of documents
-def df_des(df):
+def get_doc_df_des(df):
     des = []
     for i in df.columns:
         name_dict = dict()
@@ -85,7 +85,7 @@ st.dataframe(df.head())
 
 # Show the structure of documents
 st.write('### The documents structure')
-des = df_des(df)
+des = get_doc_df_des(df)
 st.dataframe(des)
 
 
