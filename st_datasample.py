@@ -57,7 +57,7 @@ def df_des(df):
         name_dict = dict()
         name_dict['field'] = i
         name_dict['type'] = df[i].dtype
-        name_dict['value'] = df[i][0]
+        name_dict['value example'] = df[i][0]
         name_dict['num'] = df[i].count()
         des.append(name_dict)
     des = pd.DataFrame(des)
