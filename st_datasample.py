@@ -120,6 +120,8 @@ with tab1:
 with tab2:
     st.write(db.name)
     # st.write(db.watch())
+    db_stats = db.command("dbStats")
+    st.write(db_stats)
     st.write(db.list_collection_names())
     new_col_name = st.text_input("Add a new collection name")
     if new_col_name:
@@ -132,7 +134,9 @@ with tab2:
 with tab3:
     st.write(col.full_name)
     st.write(col.name)
-    st.write(col.count_documents())
+    # st.write(col.count_documents())
+    col_stats = db.command("collStats", col.name)
+    st.write(col_stats)
     rename_col= st.text_input("Rename a collection")
     if rename_col:
         col.rename("rename_col")
