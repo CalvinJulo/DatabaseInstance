@@ -12,10 +12,6 @@
 
 import pandas as pd
 import streamlit as st
-# from coding import input_sample
-# from coding import analysis
-
-
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -30,7 +26,6 @@ st.write('hello, this is test')
 # Uses st.cache_resource to only run once.
 @st.cache_resource
 def get_mongo():
-    # uri = "mongodb+srv://mongo00:HgvVqbWtSikGEJKW@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     uri = "mongodb+srv://mongo01:k78Zcoy3CSxL3Dfo@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     # Create a new client and connect to the server
     client = MongoClient(uri, server_api=ServerApi('1'))
@@ -68,8 +63,6 @@ client = get_mongo()
 with st.sidebar:
     db_name = st.selectbox('Database', client.list_database_names())
     col_name = st.selectbox('Collection', client[db_name].list_collection_names())
-    #if st.button('Renew'):
-    #    get_col.clear()
     st.write('current_db:', db_name)
     st.write('current_col:', col_name)
 
@@ -83,7 +76,7 @@ df = pd.DataFrame(data)
 st.write('### The head documents')
 st.dataframe(df.head())
 
-# Show the stucture of documents
+# Show the structure of documents
 st.write('### The documents structure')
 des = df_des(df)
 st.dataframe(des)
