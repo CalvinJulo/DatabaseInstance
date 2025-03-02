@@ -14,6 +14,8 @@ import pandas as pd
 import streamlit as st
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from bson import ObjectId
+
 
 # Username and password from MongoDB Altas
 with st.sidebar:
@@ -118,7 +120,28 @@ df = pd.DataFrame(
 edited_docs_df = st.data_editor(docs_df, num_rows="dynamic")
 
 
+# Button to trigger the update process
+if st.button("Update Database"):
+    # Iterate over rows in the edited DataFrame
+    for index, row in edited_docs_df.iterrows():
+        # Get the document _id and convert it back to an ObjectId
+        # doc_id_str = row["_id"]
+        # try:
+        #    doc_id = ObjectId(doc_id_str)
 
+        
+        # Prepare the update data (exclude the _id field)
+        update_data = row.to_dict()
+        st.write('update_data')
+        st.write(update_data)
+        update_data.pop("_id", None)
+        st.write('after pop')
+        st.write(update_data)
+        # Update the document in MongoDB
+        # result = collection.update_one({"_id": doc_id}, {"$set": update_data})
+        # st.write(f"Row {index} updated; modified count: {result.modified_count}")
+
+    st.success("Database updated successfully!")
 
 
 
