@@ -76,7 +76,6 @@ with st.sidebar:
 st.write('##', db_name, col_name)
 db = client[db_name]
 col = db[col_name]
-client['db1']['col2'].insert_one({"message": "Hello, MongoDB!"})
 docs = get_col(db_name, col_name)
 docs_df = pd.DataFrame(docs)
 
@@ -96,12 +95,12 @@ keys = set(key for dict_ in docs for key in dict_.keys())
 st.write(list(keys))
 
 # Show the field value
-#st.write('### The value of Field')
-#value_name = st.text_input('value_name',list(keys)[0])
-#values = []
-#for i in docs:
-#    values.append(i[value_name])
-#st.dataframe(values)
+st.write('### The value of Field')
+value_name = st.text_input('value_name')
+values = []
+for i in docs:
+    values.append(i[value_name])
+st.dataframe(values)
 
 # Edit the docs
 
@@ -109,7 +108,7 @@ for doc in docs:
     doc["id_str"] = str(doc["_id"])
 
 # Display the DataFrame in a data editor for user editing
-edited_docs_df = st.data_editor("Edit the documents below:", docs_df, num_rows="dynamic")
+# edited_docs_df = st.data_editor("Edit the documents below:", docs_df, num_rows="dynamic")
 
 
 
@@ -150,6 +149,7 @@ with tab2:
     new_col_name = st.text_input("Add a new collection name")
     if new_col_name:
         new_col = db.create_collection(new_col_name)
+        new_col.insert_one({"message": "Hello, MongoDB!"})
         st.write(db.list_collection_names())
     drop_col= st.text_input("Drop a collection")
     if drop_col:
