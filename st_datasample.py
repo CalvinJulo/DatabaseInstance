@@ -111,7 +111,8 @@ with tab1:
     st.write(client.list_database_names())
     new_db_name = st.text_input("Add a new db name", )
     if new_db_name:
-        new_db = client[new_db_name]
+        new_db = client.new_db_name
+        st.write(client.list_database_names())
     drop_db = st.text_input("Drop a db name", )
     if drop_db:
         client.drop_database(drop_db)
