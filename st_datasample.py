@@ -104,8 +104,8 @@ st.dataframe(values)
 
 # Edit the docs
 
-for doc in docs:
-    doc["id_str"] = str(doc["_id"])
+#for doc in docs:
+#    doc["id_str"] = str(doc["_id"])
 
 df = pd.DataFrame(
     [
@@ -115,7 +115,7 @@ df = pd.DataFrame(
    ]
 )
 # Display the DataFrame in a data editor for user editing
-edited_docs_df = st.data_editor(df, num_rows="dynamic")
+edited_docs_df = st.data_editor(docs_df, num_rows="dynamic")
 
 
 
