@@ -115,7 +115,7 @@ df = pd.DataFrame(
    ]
 )
 # Display the DataFrame in a data editor for user editing
-edited_docs_df = st.data_editor("Edit the documents below:", df, num_rows="dynamic")
+edited_docs_df = st.data_editor(df, num_rows="dynamic")
 
 
 
