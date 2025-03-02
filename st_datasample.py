@@ -74,6 +74,8 @@ with st.sidebar:
 
 # Show the collection info in DataFrame
 st.write('##', db_name, col_name)
+db = client[db_name]
+col = db[col_name]
 data = get_col(db_name, col_name)
 df = pd.DataFrame(data)
 
@@ -99,3 +101,16 @@ values = []
 for i in data:
     values.append(i[value_name])
 st.dataframe(values)
+
+
+tab1, tab2, tab3 = st.tabs(["Client", "DB", "Col"])
+
+with tab1:
+    st.write(client.server_info())
+    st.write(client.watch())
+    st.write(client.list_database_names())
+with tab2:
+    db = client[db_name]
+    st.write(db.name)
+    st.write(db.watch())
+    st.write(db.list_collection_names())
