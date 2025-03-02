@@ -107,8 +107,15 @@ st.dataframe(values)
 for doc in docs:
     doc["id_str"] = str(doc["_id"])
 
+df = pd.DataFrame(
+    [
+       {"command": "st.selectbox", "rating": 4, "is_widget": True},
+       {"command": "st.balloons", "rating": 5, "is_widget": False},
+       {"command": "st.time_input", "rating": 3, "is_widget": True},
+   ]
+)
 # Display the DataFrame in a data editor for user editing
-edited_docs_df = st.data_editor("Edit the documents below:", docs_df, num_rows="dynamic")
+edited_docs_df = st.data_editor("Edit the documents below:", df, num_rows="dynamic")
 
 
 
