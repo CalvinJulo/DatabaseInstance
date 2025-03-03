@@ -113,7 +113,8 @@ edited_df = st.data_editor(original_df, num_rows="dynamic")
 
 if st.button("Save Changes"):
     # delete document
-    original_ids = set(original_df["_id"].dropna())
+    original_ids = str(original_df["_id"].dropna())
+    original_ids = set(original_ids)
     edited_ids = set(edited_df["_id"].dropna())
     deleted_ids = original_ids - edited_ids
     st.write('original_ids')
