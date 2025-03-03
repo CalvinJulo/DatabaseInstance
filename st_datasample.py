@@ -126,8 +126,7 @@ if st.button("Save Changes"):
         new_doc.pop("_id", None)
         if any(new_doc.values()):
             col.insert_one(new_doc)
-    
-
+    st.write('Change saved')
 
 
 
