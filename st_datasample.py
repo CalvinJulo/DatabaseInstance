@@ -110,7 +110,6 @@ st.dataframe(values)
 # Add, Delete, Renew
 original_df= docs_df
 edited_df = st.data_editor(original_df, num_rows="dynamic")
-edited_df1 = st.data_editor(original_df, num_rows="dynamic")
 
 if st.button("Save Changes"):
     # delete document
@@ -133,7 +132,23 @@ if st.button("Save Changes"):
         if any(new_doc.values()):
             # col.insert_one(new_doc)
             pass
+    # renew document
+    common_ids = original_ids.intersection(edited_ids)
+    st.write(common_ids)
+    for row_id in common_ids:
+        original_row = original_df[original_df["_id"] == row_id].iloc[0].to_dict()
+        edited_row = edited_df[edited_df["_id"] == row_id].iloc[0].to_dict()
+        original_row.pop("_id", None)
+        edited_row.pop("_id", None)
+        if original_row != edited_row:
+            # col.update_one({"_id": ObjectId(row_id)}, {"$set": edited_row})
+            st.write(edited_row)
     st.write('Change saved')
+
+
+
+
+
 
 
 
