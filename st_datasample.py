@@ -104,21 +104,48 @@ for i in docs:
     values.append(i[value_name])
 st.dataframe(values)
 
-# Edit the docs
-
-#for doc in docs:
-#    doc["id_str"] = str(doc["_id"])
-
-df = pd.DataFrame(
-    [
-       {"command": "st.selectbox", "rating": 4, "is_widget": True},
-       {"command": "st.balloons", "rating": 5, "is_widget": False},
-       {"command": "st.time_input", "rating": 3, "is_widget": True},
-   ]
-)
 
 
-# Update the mongodb
+
+# Add, Delete, Renew
+origianl_df= docs_df
+edited_df = st.data_editor(original_df, num_rows="dynamic")
+
+if st.button("Save Changes"):
+    # delete document
+    original_ids = set(original_df["_id"].dropna())
+    edited_ids = set(edited_df["_id"].dropna())
+    deleted_ids = original_ids - edited_ids
+    for del_id in deleted_ids:
+        col.delete_one({"_id": ObjectId(del_id)})
+
+    # add new document
+    new_rows = edited_df[edited_df["_id"].isna() | (edited_df["_id"] == "")]
+    for idx, row in new_rows.iterrows():
+        new_doc = row.to_dict()
+        new_doc.pop("_id", None)
+        if any(new_doc.values()):
+            col.insert_one(new_doc)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Update the docs
 # unsoloved problem,1, guarentee the type of value; 2, only update changed docs
 # Display the DataFrame in a data editor for user editing
 edited_docs_df = st.data_editor(docs_df, num_rows="dynamic")
@@ -137,7 +164,6 @@ if st.button("Update Database"):
         # Update the document in MongoDB
         col_update_one = col.update_one({"_id": doc_id}, {"$set": update_doc})
         st.write(f"Row {index} updated; modified count: {col_update_one.modified_count}")
-
 
 
 
