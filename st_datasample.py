@@ -142,7 +142,7 @@ if st.button("Save Changes"):
     st.write('common_ids')
     st.write(common_ids)
     for row_id in common_ids:
-        original_row = original_df[original_df["_id"] == row_id].iloc[0].to_dict()
+        original_row = original_df[original_df["_id"] == ObjectId(row_id)].iloc[0].to_dict()
         edited_row = edited_df[edited_df["_id"] == row_id].iloc[0].to_dict()
         original_row.pop("_id", None)
         edited_row.pop("_id", None)
