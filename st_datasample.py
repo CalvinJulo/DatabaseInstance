@@ -176,7 +176,7 @@ if st.button("Save Changes"):
 # Update the docs
 # unsoloved problem,1, guarentee the type of value; 2, only update changed docs
 # Display the DataFrame in a data editor for user editing
-edited_docs_df = st.data_editor(docs_df, num_rows="dynamic")
+edited_docs_df = st.data_editor(docs_df, num_rows="dynamic",key='k2')
 
 # Button to trigger the update process
 # check every docs in edited_df, and use _id to update the whole doc
