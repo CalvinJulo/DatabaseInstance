@@ -110,6 +110,7 @@ st.dataframe(values)
 # Add, Delete, Renew
 original_df= docs_df
 edited_df = st.data_editor(original_df, num_rows="dynamic")
+edited_df1 = st.data_editor(original_df, num_rows="dynamic")
 
 if st.button("Save Changes"):
     # delete document
@@ -125,13 +126,13 @@ if st.button("Save Changes"):
 
     # add new document
     new_rows = edited_df[edited_df["_id"].isna() | (edited_df["_id"] == "")]
-    # for idx, row in new_rows.iterrows():
-    for idx, row in original_df.iterrows():
+    for idx, row in new_rows.iterrows():
         new_doc = row.to_dict()
         new_doc.pop("_id", None)
         st.write(new_doc)
         if any(new_doc.values()):
-            col.insert_one(new_doc)
+            # col.insert_one(new_doc)
+            pass
     st.write('Change saved')
 
 
