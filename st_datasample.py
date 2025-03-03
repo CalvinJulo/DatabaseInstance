@@ -108,7 +108,7 @@ st.dataframe(values)
 
 
 # Add, Delete, Renew
-origianl_df= docs_df
+original_df= docs_df
 edited_df = st.data_editor(original_df, num_rows="dynamic")
 
 if st.button("Save Changes"):
