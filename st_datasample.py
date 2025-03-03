@@ -116,35 +116,27 @@ df = pd.DataFrame(
        {"command": "st.time_input", "rating": 3, "is_widget": True},
    ]
 )
+
+
+# Update the mongodb
+# unsoloved problem,1, guarentee the type of value; 2, only update changed docs
 # Display the DataFrame in a data editor for user editing
 edited_docs_df = st.data_editor(docs_df, num_rows="dynamic")
 
-
 # Button to trigger the update process
+# check every docs in edited_df, and use _id to update the whole doc
 if st.button("Update Database"):
     # Iterate over rows in the edited DataFrame
     for index, row in edited_docs_df.iterrows():
         # Get the document _id and convert it back to an ObjectId
         doc_id = ObjectId(row["_id"])
-        # try:
-        #    doc_id = ObjectId(doc_id_str)
-        st.write(index)
-        st.write(row)
-        
+
         # Prepare the update data (exclude the _id field)
-        update_data = row.to_dict()
-        st.write('update_data')
-        st.write(update_data)
-        update_data.pop("_id", None)
-        st.write('after pop')
-        st.write(update_data)
+        update_doc = row.to_dict()
+        update_doc.pop("_id", None)
         # Update the document in MongoDB
-        # col_update_one = col.update_one({"_id": doc_id}, {"$set": update_data})
         col_update_one = col.update_one({"_id": doc_id}, {"$set": update_data})
         st.write(f"Row {index} updated; modified count: {col_update_one.modified_count}")
-        docs = get_col(db_name, col_name)
-
-    st.success("Database updated successfully!")
 
 
 
