@@ -120,11 +120,13 @@ if st.button("Save Changes"):
     st.write(edited_ids)
     st.write(deleted_ids)
     for del_id in deleted_ids:
-        col.delete_one({"_id": ObjectId(del_id)})
+        # col.delete_one({"_id": ObjectId(del_id)})
+        st.write(del_id)
 
     # add new document
     new_rows = edited_df[edited_df["_id"].isna() | (edited_df["_id"] == "")]
-    for idx, row in new_rows.iterrows():
+    # for idx, row in new_rows.iterrows():
+    for idx, row in original_df.iterrows():
         new_doc = row.to_dict()
         new_doc.pop("_id", None)
         st.write(new_doc)
