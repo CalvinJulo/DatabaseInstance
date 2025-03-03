@@ -135,7 +135,7 @@ if st.button("Update Database"):
         update_doc = row.to_dict()
         update_doc.pop("_id", None)
         # Update the document in MongoDB
-        col_update_one = col.update_one({"_id": doc_id}, {"$set": update_data})
+        col_update_one = col.update_one({"_id": doc_id}, {"$set": update_doc})
         st.write(f"Row {index} updated; modified count: {col_update_one.modified_count}")
 
 
