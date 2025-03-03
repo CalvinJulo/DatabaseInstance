@@ -116,8 +116,11 @@ if st.button("Save Changes"):
     original_ids = set(original_df["_id"].dropna())
     edited_ids = set(edited_df["_id"].dropna())
     deleted_ids = original_ids - edited_ids
+    st.write('original_ids')
     st.write(original_ids)
+    st.write('edited_ids')
     st.write(edited_ids)
+    st.write('deleted_ids')
     st.write(deleted_ids)
     for del_id in deleted_ids:
         # col.delete_one({"_id": ObjectId(del_id)})
@@ -128,12 +131,14 @@ if st.button("Save Changes"):
     for idx, row in new_rows.iterrows():
         new_doc = row.to_dict()
         new_doc.pop("_id", None)
+        st.write('new_doc')
         st.write(new_doc)
         if any(new_doc.values()):
             # col.insert_one(new_doc)
             pass
     # renew document
     common_ids = original_ids.intersection(edited_ids)
+    st.write('common_ids')
     st.write(common_ids)
     for row_id in common_ids:
         original_row = original_df[original_df["_id"] == row_id].iloc[0].to_dict()
@@ -142,6 +147,7 @@ if st.button("Save Changes"):
         edited_row.pop("_id", None)
         if original_row != edited_row:
             # col.update_one({"_id": ObjectId(row_id)}, {"$set": edited_row})
+            st.write('edited_row')
             st.write(edited_row)
     st.write('Change saved')
 
