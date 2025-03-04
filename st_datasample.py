@@ -173,26 +173,6 @@ if st.button("Save Changes"):
 
 
 
-# Update the docs
-# unsoloved problem,1, guarentee the type of value; 2, only update changed docs
-# Display the DataFrame in a data editor for user editing
-edited_docs_df = st.data_editor(docs_df, num_rows="dynamic",key='k2')
-
-# Button to trigger the update process
-# check every docs in edited_df, and use _id to update the whole doc
-if st.button("Update Database"):
-    # Iterate over rows in the edited DataFrame
-    for index, row in edited_docs_df.iterrows():
-        # Get the document _id and convert it back to an ObjectId
-        doc_id = ObjectId(row["_id"])
-
-        # Prepare the update data (exclude the _id field)
-        update_doc = row.to_dict()
-        update_doc.pop("_id", None)
-        # Update the document in MongoDB
-        col_update_one = col.update_one({"_id": doc_id}, {"$set": update_doc})
-        st.write(f"Row {index} updated; modified count: {col_update_one.modified_count}")
-
 
 
 
