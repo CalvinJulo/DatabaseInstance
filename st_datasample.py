@@ -159,7 +159,7 @@ if st.button("Save Changes"):
 st.write('Download data from MongoDB')
 
 if docs:
-    docs_to_json = dumps(docs, indent=4)
+    docs_to_json = dumps(docs)
     st.download_button(
         label="Download MongoDB Data as JSON",
         data=docs_to_json,
