@@ -110,6 +110,8 @@ st.dataframe(values)
 
 
 # Add, Delete, Renew
+st.write('### Add, Delete, Renew Documents')
+
 original_df= docs_df
 edited_df = st.data_editor(original_df, num_rows="dynamic")
 
@@ -119,14 +121,14 @@ if st.button("Save Changes"):
     original_ids = set(original_ids)
     edited_ids = set(edited_df["_id"].dropna())
     deleted_ids = original_ids - edited_ids
-    st.write('original_ids')
-    st.write(original_ids)
+    # st.write('original_ids')
+    # st.write(original_ids)
     st.write('edited_ids')
     st.write(edited_ids)
     st.write('deleted_ids')
     st.write(deleted_ids)
     for del_id in deleted_ids:
-        # col.delete_one({"_id": ObjectId(del_id)})
+        col.delete_one({"_id": ObjectId(del_id)})
         st.write(del_id)
 
     # add new document
@@ -137,7 +139,7 @@ if st.button("Save Changes"):
         st.write('new_doc')
         st.write(new_doc)
         if any(new_doc.values()):
-            # col.insert_one(new_doc)
+            col.insert_one(new_doc)
             pass
     # renew document
     common_ids = original_ids.intersection(edited_ids)
@@ -149,7 +151,7 @@ if st.button("Save Changes"):
         original_row.pop("_id", None)
         edited_row.pop("_id", None)
         if original_row != edited_row:
-            # col.update_one({"_id": ObjectId(row_id)}, {"$set": edited_row})
+            col.update_one({"_id": ObjectId(row_id)}, {"$set": edited_row})
             st.write('edited_row')
             st.write(edited_row)
     st.write('Change saved')
@@ -205,6 +207,8 @@ if uploaded_file is not None:
 
 
 # edit client, database, collection
+
+st.write('### edit client, database, collection')
 
 tab1, tab2, tab3 = st.tabs(["Client", "DB", "Col"])
 
