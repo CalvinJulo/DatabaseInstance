@@ -15,7 +15,7 @@ import streamlit as st
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson import ObjectId
-from bson.json_util import dumps
+from bson.json_util import dumps,loads
 
 
 
@@ -172,7 +172,20 @@ st.download_button(
     
 
 
-
+# upload data to MongoDB
+st.write('### upload data to MongoDB')
+uploaded_file = st.file_uploader("Choose a JSON file", type=["json"])
+if uploaded_file is not None:
+    # Read file contents as a string
+    file_contents = uploaded_file.getvalue().decode("utf-8")
+    json_to_docs = loads(file_contents)
+    if not isinstance(json_to_docs, list):
+        json_to_docs = [json_to_docs]
+    for doc in json_to_docs:
+        if "_id" in doc:
+            del doc["_id"]
+    insert_docs = col.insert_many(json_to_docs)
+    st.success(f"Inserted {len(insert_docs.inserted_ids)} documents into MongoDB.")
 
 
 
