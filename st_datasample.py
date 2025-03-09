@@ -155,8 +155,24 @@ if st.button("Save Changes"):
     st.write('Change saved')
     
 
+
+
+message1 = st.text_area("Message", value="Lorem ipsum.\nStreamlit is cool.")
+
+if st.button("Prepare download"):
+    st.download_button(
+        label="Download text",
+        data=message1,
+        file_name="message.txt",
+        on_click="ignore",
+        type="primary",
+        icon=":material/download:",
+    )
+
+
+
 # Download data from MongoDB
-st.write('Download data from MongoDB')
+st.write('### Download data from MongoDB')
 
 if docs:
     docs_to_json = dumps(docs)
