@@ -15,6 +15,8 @@ import streamlit as st
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from bson import ObjectId
+from bson.json_util import dumps
+
 
 
 # Username and password from MongoDB Altas
@@ -151,10 +153,19 @@ if st.button("Save Changes"):
             st.write('edited_row')
             st.write(edited_row)
     st.write('Change saved')
+    
 
+# Download data from MongoDB
+st.write('Download data from MongoDB')
 
-
-
+if docs:
+    docs_to_json = dumps(docs, indent=4)
+    st.download_button(
+        label="Download MongoDB Data as JSON",
+        data=docs_to_json,
+        # file_name="mongodb_data.json"
+    )
+    
 
 
 
