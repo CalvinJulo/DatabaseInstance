@@ -163,6 +163,7 @@ tab2_1, tab2_2, tab2_3, tab2_4 = st.tabs(["Client", "DB", "Col","Doc"])
 with tab2_1:
     # st.write(client.server_info())
     # st.write(client.watch())
+    st.write('database list')
     st.write(client.list_database_names())
     new_db_name = st.text_input("Add a new db name")
     if new_db_name:
@@ -173,7 +174,7 @@ with tab2_1:
     if drop_db:
         client.drop_database(drop_db)
 with tab2_2:
-    st.write(db.name)
+    st.write(db.name,'and collections')
     # st.write(db.watch())
     # db_stats = db.command("dbStats")
     # st.write(db_stats)
@@ -197,7 +198,7 @@ with tab2_3:
         col.rename(rename_col)
     
 with tab2_4:
-    st.write(col.full_name)
+    st.write(col.full_name, 'and fields')
     st.write(docs_fields)
     old_field = st.text_input("Old Field Name", key="rename_old")
     new_field = st.text_input("New Field Name", key="rename_new")
