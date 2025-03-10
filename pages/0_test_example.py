@@ -174,11 +174,11 @@ with tab1_1:
     if docs:
         docs_to_json = dumps(docs)
         st.write(docs_to_json)
-    st.download_button(
-        label="Download MongoDB Data as JSON",
-        data=docs_to_json,
-        file_name="mongodb_data.json",
-        mime="application/json")
+        st.download_button(
+            label="Download MongoDB Data as JSON",
+            data=docs_to_json,
+            file_name="mongodb_data.json",
+            mime="application/json")
     
 with tab2_1:
     # upload data to MongoDB
