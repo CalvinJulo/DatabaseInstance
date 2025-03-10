@@ -201,7 +201,7 @@ with tab2_4:
     st.write(docs_fields)
     old_field = st.text_input("Old Field Name", key="rename_old")
     new_field = st.text_input("New Field Name", key="rename_new")
-    if st.button('Rename field')
+    if st.button('Rename field'):
         if old_field and new_field:
             rename_res = col.update_many({}, {"$rename": {old_field: new_field}})
             st.success(f"Renamed field '{old_field}' to '{new_field}' in {rename_res.modified_count} document(s).")
