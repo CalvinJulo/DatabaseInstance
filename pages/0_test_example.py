@@ -10,12 +10,18 @@
 """
 # CMD Run Command ： streamlit run /Users/xx.py --server.port 8501
 
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
 import pandas as pd
 import streamlit as st
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
 from bson import ObjectId
 from bson.json_util import dumps,loads
+from pages.common_lib import run_mongo
 
 
 
@@ -32,19 +38,8 @@ st.write('hello, this is test')
 # And should ensure it only run once.
 @st.cache_resource
 def get_mongo():
-    uri = "mongodb+srv://mongo01:k78Zcoy3CSxL3Dfo@cluster0.v53a0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-    # Create a new client and connect to the server
-    client = MongoClient(uri, server_api=ServerApi('1'))
-    # Send a ping to confirm a successful connection
-    try:
-        client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
-        st.write('Pinged your deployment. You successfully connected to MongoDB!')
-    except Exception as e:
-        print(e, 'Fail connect')
-        st.write('Fail connect')
+    client = run_mongo.connect_mongo(Username, Password)
     return client
-
 
 # Pull data from the collection.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
