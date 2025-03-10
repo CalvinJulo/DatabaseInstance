@@ -102,9 +102,10 @@ st.write(list(keys))
 st.write('### The value of Field')
 value_name = st.text_input('value_name')
 values = []
-for i in docs:
-    values.append(i[value_name])
-st.dataframe(values)
+if value_name:
+    for i in docs:
+        values.append(i[value_name])
+    st.dataframe(values)
 
 
 
