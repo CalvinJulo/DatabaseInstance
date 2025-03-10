@@ -22,16 +22,17 @@ import streamlit as st
 from bson import ObjectId
 from bson.json_util import dumps,loads
 from pages.common_lib import run_mongo
+import time
 
 
+
+current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+st.write('Current time:',current_time)
 
 # Username and password from MongoDB Altas
 with st.sidebar:
     Username = st.text_input('Username', 'mongo01')
     Password = st.text_input('password', 'k78Zcoy3CSxL3Dfo')
-
-
-st.write('hello, this is test')
 
 # Create a new client and connect to the server
 # Initialize connection. And return the client
@@ -63,7 +64,7 @@ with st.sidebar:
 st.write('##', db_name, col_name)
 db = client[db_name]
 col = db[col_name]
-docs = get_col(db_name, col_name)
+docs = get_col(db_name, col_name) # docs is a list of documents, and documents is a dict or json
 docs_df = pd.DataFrame(docs)
 docs_des = run_mongo.get_docs_df_des(docs_df)
 docs_fields = set(key for dict_ in docs for key in dict_.keys())
@@ -73,20 +74,6 @@ st.write('### The head documents')
 st.dataframe(docs_df.head())
 st.write('### The documents structure')
 st.dataframe(docs_des)
-st.write('### The fields of Documents')
-st.write(docs_fields)
-st.write(list(docs_fields))
-
-# Show the field value
-st.write('### The value of Field')
-value_name = st.text_input('value_name')
-values = []
-if value_name:
-    for i in docs:
-        values.append(i[value_name])
-    st.dataframe(values)
-
-
 
 
 # Add, Delete, Renew
