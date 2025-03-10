@@ -76,9 +76,6 @@ with st.sidebar:
             intial_doc = {"name": 'name',"email": 'email',"phone": 'phone',"company": 'company',"notes": 'notes'}
             col.insert_one(intial_doc)
             st.success(f"Inital collection!")
-    with option:
-        st.write('sss')
-
 
 
 st.write('### The head documents')
@@ -87,6 +84,42 @@ st.write('### The documents structure')
 st.dataframe(docs_des)
 
 
-    
+st.write('### Add, Delete, Renew Documents')
+
+original_df= docs_df
+edited_df = st.data_editor(original_df, num_rows="dynamic")
+
+
+
+if st.button("Save Changes"):
+    original_ids = original_df["_id"].dropna().astype(str)
+    original_ids = set(original_ids)
+    edited_ids = set(edited_df["_id"].dropna())
+    deleted_ids = original_ids - edited_ids
+    common_ids = original_ids.intersection(edited_ids)
+    st.write('delete document') # delete document
+    for del_id in deleted_ids:
+        col.delete_one({"_id": ObjectId(del_id)})
+        st.write(del_id)
+
+    st.write('Add document') # add new document
+    new_rows = edited_df[edited_df["_id"].isna() | (edited_df["_id"] == "")]
+    for idx, row in new_rows.iterrows():
+        new_doc = row.to_dict()
+        new_doc.pop("_id", None)
+        st.write(new_doc)
+        if any(new_doc.values()):
+            col.insert_one(new_doc)
+            pass
+    st.write('Renew document')# renew document
+    for row_id in common_ids:
+        original_row = original_df[original_df["_id"] == ObjectId(row_id)].iloc[0].to_dict()
+        edited_row = edited_df[edited_df["_id"] == row_id].iloc[0].to_dict()
+        original_row.pop("_id", None)
+        edited_row.pop("_id", None)
+        if original_row != edited_row:
+            col.update_one({"_id": ObjectId(row_id)}, {"$set": edited_row})
+            st.write(edited_row)
+    st.write('Change saved')
 
 
