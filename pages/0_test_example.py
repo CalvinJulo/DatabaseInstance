@@ -83,12 +83,13 @@ original_df= docs_df
 edited_df = st.data_editor(original_df, num_rows="dynamic")
 
 
-original_ids = original_df["_id"].dropna().astype(str)
-original_ids = set(original_ids)
-edited_ids = set(edited_df["_id"].dropna())
-deleted_ids = original_ids - edited_ids
-common_ids = original_ids.intersection(edited_ids)
+
 if st.button("Save Changes"):
+    original_ids = original_df["_id"].dropna().astype(str)
+    original_ids = set(original_ids)
+    edited_ids = set(edited_df["_id"].dropna())
+    deleted_ids = original_ids - edited_ids
+    common_ids = original_ids.intersection(edited_ids)
     st.write('delete document') # delete document
     for del_id in deleted_ids:
         col.delete_one({"_id": ObjectId(del_id)})
