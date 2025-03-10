@@ -170,7 +170,7 @@ tab1_1, tab1_2 = st.tabs(["Download", "Upload"])
 
 with tab1_1:
     # Download data from MongoDB
-    st.write('### Download data from MongoDB')
+    st.write('Download data from MongoDB')
     if docs:
         docs_to_json = dumps(docs)
         st.write(docs_to_json)
@@ -182,7 +182,7 @@ with tab1_1:
     
 with tab1_2:
     # upload data to MongoDB
-    st.write('### upload data to MongoDB')
+    st.write('upload data to MongoDB')
     uploaded_file = st.file_uploader("Choose a JSON file", type=["json"])
     if uploaded_file is not None:
         # Read file contents as a string
@@ -198,7 +198,7 @@ with tab1_2:
 
 
 
-
+st.write('***')
 
 # edit client, database, collection
 
