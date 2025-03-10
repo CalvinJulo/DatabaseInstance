@@ -49,18 +49,6 @@ def get_col(db, col):
     documents = list(documents) # make hashable for st.cache_data
     return documents
 
-# show the description of df of documents
-def get_docs_df_des(df):
-    des = []
-    for i in df.columns:
-        name_dict = dict()
-        name_dict['field'] = i
-        name_dict['type'] = df[i].dtype
-        name_dict['value example'] = df[i][0]
-        name_dict['num'] = df[i].count()
-        des.append(name_dict)
-    des = pd.DataFrame(des)
-    return des
 
 # Show the Database and its Collection from the MongoDB
 client = get_mongo()
@@ -77,25 +65,17 @@ db = client[db_name]
 col = db[col_name]
 docs = get_col(db_name, col_name)
 docs_df = pd.DataFrame(docs)
+docs_des = run_mongo.get_docs_df_des(docs_df)
+docs_fields = set(key for dict_ in docs for key in dict_.keys())
 
 
-
-
-
-# Show the example of documents
 st.write('### The head documents')
 st.dataframe(docs_df.head())
-
-# Show the structure of documents
 st.write('### The documents structure')
-des = get_docs_df_des(docs_df)
-st.dataframe(des)
-
-
-# Show the Document field
-st.write('### The field of Documents')
-keys = set(key for dict_ in docs for key in dict_.keys())
-st.write(list(keys))
+st.dataframe(docs_des)
+st.write('### The fields of Documents')
+st.write(docs_fields)
+st.write(list(docs_fields))
 
 # Show the field value
 st.write('### The value of Field')
