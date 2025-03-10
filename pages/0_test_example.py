@@ -180,7 +180,7 @@ with tab1_1:
             file_name="mongodb_data.json",
             mime="application/json")
     
-with tab2_1:
+with tab1_2:
     # upload data to MongoDB
     st.write('### upload data to MongoDB')
     uploaded_file = st.file_uploader("Choose a JSON file", type=["json"])
