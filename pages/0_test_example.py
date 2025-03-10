@@ -83,6 +83,10 @@ col = db[col_name]
 docs = get_col(db_name, col_name)
 docs_df = pd.DataFrame(docs)
 
+
+
+
+
 # Show the example of documents
 st.write('### The head documents')
 st.dataframe(docs_df.head())
@@ -160,48 +164,37 @@ if st.button("Save Changes"):
 
 
 
+st.write('###  Data Store from MongoDB')
 
-# Download data from MongoDB
-st.write('### Download data from MongoDB')
+tab1_1, tab1_2 = st.tabs(["Download", "Upload"])
 
-if docs:
-    docs_to_json = dumps(docs)
-    st.write(docs_to_json)
-st.download_button(
-    label="Download MongoDB Data as JSON",
-    data=docs_to_json,
-    file_name="mongodb_data.json",
-    mime="application/json")
+with tab1_1:
+    # Download data from MongoDB
+    st.write('### Download data from MongoDB')
+    if docs:
+        docs_to_json = dumps(docs)
+        st.write(docs_to_json)
+    st.download_button(
+        label="Download MongoDB Data as JSON",
+        data=docs_to_json,
+        file_name="mongodb_data.json",
+        mime="application/json")
     
-
-
-# upload data to MongoDB
-st.write('### upload data to MongoDB')
-uploaded_file = st.file_uploader("Choose a JSON file", type=["json"])
-if uploaded_file is not None:
-    # Read file contents as a string
-    file_contents = uploaded_file.getvalue().decode("utf-8")
-    json_to_docs = loads(file_contents)
-    if not isinstance(json_to_docs, list):
-        json_to_docs = [json_to_docs]
-    for doc in json_to_docs:
-        if "_id" in doc:
-            del doc["_id"]
-    insert_docs = col.insert_many(json_to_docs)
-    st.success(f"Inserted {len(insert_docs.inserted_ids)} documents into MongoDB.")
-
-
-
-
-
-
-
-
-
-
-
-
-
+with tab2_1:
+    # upload data to MongoDB
+    st.write('### upload data to MongoDB')
+    uploaded_file = st.file_uploader("Choose a JSON file", type=["json"])
+    if uploaded_file is not None:
+        # Read file contents as a string
+        file_contents = uploaded_file.getvalue().decode("utf-8")
+        json_to_docs = loads(file_contents)
+        if not isinstance(json_to_docs, list):
+            json_to_docs = [json_to_docs]
+        for doc in json_to_docs:
+            if "_id" in doc:
+                del doc["_id"]
+        insert_docs = col.insert_many(json_to_docs)
+        st.success(f"Inserted {len(insert_docs.inserted_ids)} documents into MongoDB.")
 
 
 
@@ -211,9 +204,9 @@ if uploaded_file is not None:
 
 st.write('### edit client, database, collection')
 
-tab1, tab2, tab3 = st.tabs(["Client", "DB", "Col"])
+tab2_1, tab2_2, tab2_3 = st.tabs(["Client", "DB", "Col"])
 
-with tab1:
+with tab2_1:
     # st.write(client.server_info())
     # st.write(client.watch())
     st.write(client.list_database_names())
@@ -225,7 +218,7 @@ with tab1:
     drop_db = st.text_input("Drop a db")
     if drop_db:
         client.drop_database(drop_db)
-with tab2:
+with tab2_2:
     st.write(db.name)
     # st.write(db.watch())
     # db_stats = db.command("dbStats")
@@ -240,7 +233,7 @@ with tab2:
     if drop_col:
         db[drop_col].drop()
 
-with tab3:
+with tab2_3:
     st.write(col.full_name)
     st.write(col.name)
     # col_stats = db.command("collStats", col.name)
