@@ -158,7 +158,7 @@ st.write('***')
 
 st.write('### edit client, database, collection')
 
-tab2_1, tab2_2, tab2_3 = st.tabs(["Client", "DB", "Col"])
+tab2_1, tab2_2, tab2_3, tab2_4 = st.tabs(["Client", "DB", "Col","Doc"])
 
 with tab2_1:
     # st.write(client.server_info())
@@ -196,3 +196,20 @@ with tab2_3:
     if rename_col:
         col.rename(rename_col)
     
+with tab2_4:
+    st.write(col.full_name)
+    st.write(docs_fields)
+    old_field = st.text_input("Old Field Name", key="rename_old")
+    new_field = st.text_input("New Field Name", key="rename_new")
+    if st.button('Rename field')
+        if old_field and new_field:
+            rename_res = collection.update_many({}, {"$rename": {old_field: new_field}})
+            st.success(f"Renamed field '{old_field}' to '{new_field}' in {rename_res.modified_count} document(s).")
+    added_field_name = st.text_input("Add new Field Name", key="add_field")
+    if st.button("Add New Field"):
+        if added_field_name:
+            added_res = collection.update_many({}, {"$set": {added_field_name: None}})
+            st.success(f"Added field '{added_field_name}' with default value 'None' to {added_res.modified_count} document(s).")
+ 
+    
+
