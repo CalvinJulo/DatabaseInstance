@@ -84,7 +84,7 @@ edited_df = st.data_editor(original_df, num_rows="dynamic")
 
 original_ids = original_df["_id"].dropna().astype(str)
 original_ids = set(original_ids)
-edited_ids = set(edited_df["_id"].dropna()
+edited_ids = set(edited_df["_id"].dropna())
 deleted_ids = original_ids - edited_ids
 common_ids = original_ids.intersection(edited_ids)
 
