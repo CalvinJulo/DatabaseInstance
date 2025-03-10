@@ -203,12 +203,12 @@ with tab2_4:
     new_field = st.text_input("New Field Name", key="rename_new")
     if st.button('Rename field')
         if old_field and new_field:
-            rename_res = collection.update_many({}, {"$rename": {old_field: new_field}})
+            rename_res = col.update_many({}, {"$rename": {old_field: new_field}})
             st.success(f"Renamed field '{old_field}' to '{new_field}' in {rename_res.modified_count} document(s).")
     added_field_name = st.text_input("Add new Field Name", key="add_field")
     if st.button("Add New Field"):
         if added_field_name:
-            added_res = collection.update_many({}, {"$set": {added_field_name: None}})
+            added_res = col.update_many({}, {"$set": {added_field_name: None}})
             st.success(f"Added field '{added_field_name}' with default value 'None' to {added_res.modified_count} document(s).")
  
     
