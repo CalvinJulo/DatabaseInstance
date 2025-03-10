@@ -69,8 +69,20 @@ docs_df = pd.DataFrame(docs)
 docs_des = run_mongo.get_docs_df_des(docs_df)
 docs_fields = set(key for dict_ in docs for key in dict_.keys())
 
+with st.form("Initial data"):
+    intial_doc = {"name": 'name',"email": 'email',"phone": 'phone',"company": 'company',"notes": 'notes'}
+    st.write(intial_doc)
+    submitted = st.form_submit_button("Initial")
+    if submitted:
+        col.insert_one(intial_doc)
+        st.success(f"Inital collection!")
 
 st.write('### The head documents')
 st.dataframe(docs_df.head())
 st.write('### The documents structure')
 st.dataframe(docs_des)
+
+
+    
+
+
