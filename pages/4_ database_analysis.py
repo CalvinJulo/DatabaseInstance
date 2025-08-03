@@ -24,11 +24,7 @@ from bson.json_util import dumps,loads
 from pages.common_lib import run_mongo
 import time
 
-st.info('This is analysis mode')
-st.info('Get the sample of mongodb')
-st.info('Show the structure of the sample data')
-st.info('Search the sample data')
-st.info('Visualize the outcome')
+st.info('This is analysis mode \n\n Get the sample of mongodb \n\n Show the structure of the sample data \n\n Search the sample data \n\n Visualize the outcome')
 
 
 
