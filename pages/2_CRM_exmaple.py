@@ -25,8 +25,8 @@ from pages.common_lib import run_mongo
 import time
 
 
-st.info('This is CRM MIS')
-st.info('CRUD the information')
+st.info('This is CRM MIS \n\n--CRUD the information')
+
 
 
 current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
