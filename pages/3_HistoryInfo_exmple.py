@@ -24,8 +24,8 @@ from bson.json_util import dumps,loads
 from pages.common_lib import run_mongo
 import time
 
-st.info('This is History information')
-st.info('CRUD the information')
+st.info('This is History information \n\n CRUD the information')
+
 
 current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 st.write('Current time:',current_time)
