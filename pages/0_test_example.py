@@ -24,9 +24,7 @@ from bson.json_util import dumps,loads
 from pages.common_lib import run_mongo
 import time
 
-st.info('This is the basic intro of mongodb')
-st.info('-- connect to Mongodb Altas')
-st.info('-- CRUD DB, Col, Doc')
+st.info('This is the basic intro of mongodb\n\n-- connect to Mongodb Altas\n\n-- CRUD DB, Col, Doc')
 
 
 current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
