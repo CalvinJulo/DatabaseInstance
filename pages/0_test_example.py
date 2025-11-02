@@ -55,7 +55,8 @@ def get_col(db, col):
 # Show the Database and its Collection from the MongoDB
 client = get_mongo()
 with st.sidebar:
-    db_name = st.selectbox('Database', client.list_database_names()-['admin', 'config', 'local'])
+    db_name_list = [name for name in client.list_database_names() if name not in ['admin', 'config', 'local']]
+    db_name = st.selectbox('Database', db_name_list)
     col_name = st.selectbox('Collection', client[db_name].list_collection_names())
     st.write('current_db:', db_name)
     st.write('current_col:', col_name)
