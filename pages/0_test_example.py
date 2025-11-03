@@ -160,12 +160,28 @@ st.write('***')
 
 st.write('### edit client, database, collection')
 
+
+structure_list=[]
+for i in client.list_database_names():
+    for j in client[i].list_collection_names():
+        structure_dict={}
+        structure_dict['db']=i
+        structure_dict['col']=j
+        structure_dict['docs_field'] = set(key for dict_ in get_col(i, j)  for key in dict_.keys())
+        structure_list.append(structure_dict)
+st.write(pd.DataFrame(structure_list))
+
+
+
+
+
+
 tab2_1, tab2_2, tab2_3, tab2_4 = st.tabs(["Client", "DB", "Col","Doc"])
 
 with tab2_1:
     # st.write(client.server_info())
     # st.write(client.watch())
-    st.write('database list')
+    st.write('database list in Client')
     st.write(client.list_database_names())
     new_db_name = st.text_input("Add a new db name")
     if new_db_name:
@@ -176,7 +192,7 @@ with tab2_1:
     if drop_db:
         client.drop_database(drop_db)
 with tab2_2:
-    st.write(db.name,'and collections')
+    st.write('collection list in',db.name)
     # st.write(db.watch())
     # db_stats = db.command("dbStats")
     # st.write(db_stats)
@@ -191,16 +207,16 @@ with tab2_2:
         db[drop_col].drop()
 
 with tab2_3:
-    st.write(col.full_name)
+    st.write('Current collection:',col.full_name)
     st.write(col.name)
     # col_stats = db.command("collStats", col.name)
     # st.write(col_stats)
-    rename_col= st.text_input("Rename a collection")
+    rename_col= st.text_input("Rename the collection")
     if rename_col:
         col.rename(rename_col)
     
 with tab2_4:
-    st.write(col.full_name, 'and fields')
+    st.write('fields in',col.full_name)
     st.write(docs_fields)
     old_field = st.text_input("Old Field Name", key="rename_old")
     new_field = st.text_input("New Field Name", key="rename_new")
