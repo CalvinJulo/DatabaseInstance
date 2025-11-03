@@ -129,7 +129,7 @@ with tab1_2:
     st.write('Download data from MongoDB')
     if docs:
         docs_to_json = dumps(docs)
-        st.write(docs_to_json)
+        # st.write(docs_to_json)
         st.download_button(
             label="Download MongoDB Data as JSON",
             data=docs_to_json,
