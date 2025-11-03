@@ -169,8 +169,9 @@ for i in client.list_database_names():
         structure_dict['db']=i
         structure_dict['col']=j
         structure_dict['docs_num']=structure_db[j].estimated_document_count()
-        structure_stats = structure_db.command('collstats', j)
-        structure_dict['col_size']= round(structure_stats.get('size', 0) / (1024 * 1024), 2) # size 是集合的逻辑大小（字节），除以 1024^2 转换为 MB
+        # structure_stats = structure_db.command('collstats', j)
+        # structure_dict['col_size']= round(structure_stats.get('size', 0) / (1024 * 1024), 2) # size 是集合的逻辑大小（字节），除以 1024^2 转换为 MB
+        structure_dict['col_size']=''
         structure_dict['docs_field'] = set(key for dict_ in get_col(i, j)  for key in dict_.keys())
         structure_list.append(structure_dict)
 st.write(pd.DataFrame(structure_list))
