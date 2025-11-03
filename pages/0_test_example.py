@@ -80,6 +80,8 @@ st.dataframe(docs_des)
 # Filter
 st.write('### Filter, Search Documents')
 
+
+st.mutliselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
 find_docs_result= docs
 st.write(pd.DataFrame(find_docs_result))
 
