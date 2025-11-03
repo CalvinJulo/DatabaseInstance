@@ -77,6 +77,14 @@ st.dataframe(docs_df.head())
 st.write('### The documents structure')
 st.dataframe(docs_des)
 
+# Filter
+st.write('### Filter, Search Documents')
+
+find_docs_result= docs
+st.write(pd.DataFrame(find_docs_result))
+
+
+
 
 # Add, Delete, Renew
 st.write('### Add, Delete, Renew Documents')
