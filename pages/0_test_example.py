@@ -45,7 +45,7 @@ def get_mongo():
 
 # Pull data from the collection.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
-@st.cache_resource
+@st.cache_data(ttl=600)
 def get_col(db, col):
     documents = client[db][col].find()
     documents = list(documents) # make hashable for st.cache_data
