@@ -232,7 +232,7 @@ with tab2_4:
     added_field_name = st.text_input("Add new Field Name", key="add_field")
     if st.button("Add New Field"):
         if added_field_name:
-            added_res = col.update_many({}, {"$set": {added_field_name: added_field_name}})
+            added_res = col.update_many({}, {"$set": {added_field_name: None}})
             st.success(f"Added field '{added_field_name}' with default value 'None' to {added_res.modified_count} document(s).")
  
     
