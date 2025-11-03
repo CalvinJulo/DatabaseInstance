@@ -160,7 +160,7 @@ st.write('***')
 
 st.write('### edit client, database, collection')
 
-
+'''
 structure_list=[]
 for i in client.list_database_names():
     structure_db = client[i]
@@ -175,7 +175,7 @@ for i in client.list_database_names():
         structure_dict['docs_field'] = set(key for dict_ in get_col(i, j)  for key in dict_.keys())
         structure_list.append(structure_dict)
 st.write(pd.DataFrame(structure_list))
-
+'''
 
 
 
@@ -232,7 +232,7 @@ with tab2_4:
     added_field_name = st.text_input("Add new Field Name", key="add_field")
     if st.button("Add New Field"):
         if added_field_name:
-            added_res = col.update_many({}, {"$set": {added_field_name: None}})
+            added_res = col.update_many({}, {"$set": {added_field_name: added_field_name}})
             st.success(f"Added field '{added_field_name}' with default value 'None' to {added_res.modified_count} document(s).")
  
     
