@@ -101,7 +101,7 @@ pipeline=[{'$match': {'rated': 'TV-G'}}]
 l2={'$match':{ 'title': 'Beau Geste' }} 
 #pipeline.append(l2)
 #pipeline.append(l1)
-filter_docs = col.aggregate(pipeline)
+filter_docs = client[db_name][col_name].aggregate(pipeline)
 st.write('filter_docs')
 st.write(filter_docs)
 filter_docs_list =[filter_docs]
