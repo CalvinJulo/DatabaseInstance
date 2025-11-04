@@ -86,7 +86,7 @@ condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','
 pipeline=[]
 #l1={"$limit": 2 }
 l2={'$match':{ 'title': 'Beau Geste' }} 
-pipeline.append(l2)
+#pipeline.append(l2)
 #pipeline.append(l1)
 filter_docs = col.aggregate(pipeline)
 st.write('filter_docs')
