@@ -85,10 +85,10 @@ st.write('### Filter, Search Documents')
 
 
 example = ""
-condition = st.text_input("condition:[{'$match': {'rated': 'TV-G'}}]",'')
+condition = st.text_input("condition:[{"$match": {"rated": "TV-G"}}]",'')
 
-pipeline=json.loads(condition)
-# pipeline.append({'$match': {'rated': 'TV-G'}})
+# pipeline=json.loads(condition)
+pipeline=[].append({"$match": {"rated": "TV-G"}})
 
 filter_result = col.aggregate(pipeline)
 st.write(pd.json_normalize(list(filter_result),sep='.'))
