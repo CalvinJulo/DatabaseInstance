@@ -87,7 +87,7 @@ st.write('### Filter, Search Documents')
 st.text('''example: [{'$match': {'rated': 'TV-G'}}]''')
 condition = st.text_input("condition",'[]')
 
-pipeline=json.loads(condition)
+pipeline=json.loads(condition.replace("'", '"'))
 #pipeline=[].append({'$match': {'rated': 'TV-G'}})
 
 filter_result = col.aggregate(pipeline)
