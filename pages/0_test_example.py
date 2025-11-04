@@ -84,10 +84,7 @@ st.write('### Filter, Search Documents')
 
 
 
-st.text("example: [
-    {'$match': {'rated': 'TV-G'}},
-    {'$match': {'runtime': {'$gt': 1}}},
-    {'$match': {'name': {'$regex':'Ned','$options':'i'} } ]")
+st.text("example: [{'$match': {'rated': 'TV-G'}},{'$match': {'runtime': {'$gt': 1}}},{'$match': {'name': {'$regex':'Ned','$options':'i'}}]")
 
 
 condition = st.text_input("condition",'[]')
