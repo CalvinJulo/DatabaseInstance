@@ -83,7 +83,9 @@ st.write('### Filter, Search Documents')
 
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
 find_docs_result= docs
-st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
+st.write(pd.json_normalize(find_docs_result))
+# st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
+
 st.write(pd.DataFrame(find_docs_result))
 
 
