@@ -98,6 +98,7 @@ filter_docs = col.aggregate(pipeline)
 st.write('filter_docs')
 st.write(filter_docs)
 filter_docs_list =[filter_docs]
+st.write(filter_docs_list)
 st.write(pd.json_normalize(filter_docs_list,sep='_'))
 # st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
 
