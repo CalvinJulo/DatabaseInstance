@@ -80,7 +80,7 @@ st.write('### The documents structure')
 st.dataframe(docs_des)
 st.write('### The documents description')
 st.dataframe(docs_jn_df.describe(include='all').T)
-st.selectbox('field',docs_jn_df.columns.tolist())
+select_field = st.pills('field',docs_jn_df.columns.tolist())
 
 # Filter
 st.write('### Filter, Search Documents')
