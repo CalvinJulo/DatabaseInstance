@@ -85,7 +85,7 @@ st.write('### Filter, Search Documents')
 
 
 result = client['sample_mflix']['embedded_movies'].aggregate([
-    {'$match': {'rated': 'TV-G'}}, {'$count': 'type'}
+    {'$match': {'rated': 'TV-G'}}
 ])
 
 st.write(result)
