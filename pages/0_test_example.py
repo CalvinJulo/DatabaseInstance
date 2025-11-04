@@ -85,7 +85,7 @@ st.write('### Filter, Search Documents')
 
 
 example = ":[{'$match': {'rated': 'TV-G'}}]"
-condition = st.text("condition",'')
+condition = st.text("condition",'dkl')
 
 pipeline=json.loads(condition)
 # pipeline.append({'$match': {'rated': 'TV-G'}})
