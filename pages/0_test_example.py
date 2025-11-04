@@ -83,21 +83,13 @@ st.write('### Filter, Search Documents')
 
 
 
-
-result = client['sample_mflix']['embedded_movies'].aggregate([{'$match': {'rated': 'TV-G'}}])
-
-st.write('kkkkkkkkk')
-st.write(pd.json_normalize(list(result),sep='_'))
-st.write('ggggg')
-
-
-
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
-
 pipline=[]
 pipline.append({'$match': {'rated': 'TV-G'}})
+l1= {'$limit':2}
+pipline.append(l1)
 filter_result = col.aggregate(pipline)
-st.write(pd.json_normalize(list(filter_result),sep='_'))
+st.write(pd.json_normalize(list(filter_result),sep='.'))
 
 # st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
 #st.write(pd.DataFrame(find_docs_result))
