@@ -97,7 +97,7 @@ st.write('ggggg')
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
 
 pipeline=[{'$match': {'rated': 'TV-G'}}]
-filter_docs = client[db_name][col_name].aggregate([
+filter_docs =client['sample_mflix']['embedded_movies'].aggregate([
     {'$match': {'rated': 'TV-G'}}
 ])
 st.write('filter_docs')
