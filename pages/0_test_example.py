@@ -83,8 +83,12 @@ st.write('### Filter, Search Documents')
 
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
 
-filter_docs = col.aggregate([{"$limit": 2 } ])
-# filter_docs = col.aggregate([{'$match':{ 'year' : 1966 } } ])
+pipeline=[]
+l1={"$limit": 2 }
+l2={'$match':{ 'year': 1966 }} 
+pipeline.append(l2)
+pipeline.append(l1)
+filter_docs = col.aggregate(pipeline)
 st.write('filter_docs')
 st.write(filter_docs)
 filter_docs_list =[filter_docs]
