@@ -85,7 +85,7 @@ st.write('### Filter, Search Documents')
 
 
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
-pipline=[]
+pipeline=[]
 pipeline.append({'$match': {'rated': 'TV-G'}})
 l1= {'$limit':2}
 pipeline.append(l1)
