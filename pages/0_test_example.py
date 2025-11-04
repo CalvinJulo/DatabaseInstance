@@ -89,7 +89,8 @@ pipeline=[]
 pipeline.append({'$match': {'rated': 'TV-G'}})
 l1= {'$limit':2}
 pipeline.append(l1)
-st. code('pineline',pineline)
+st.write('Pipeline')
+st.write(pd.DataFrame(pipeline))
 filter_result = col.aggregate(pipeline)
 st.write(pd.json_normalize(list(filter_result),sep='.'))
 
