@@ -100,19 +100,24 @@ st.write('### Filter, Search Documents')
 
 
 
-st.text("example: [{'$match': {'rated': 'TV-G'}},{'$match': {'runtime': {'$gt': 1}}},{'$match': {'name': {'$regex':'Ned','$options':'i'}}]")
+st.text("aggregate example: [{'$match': {'rated': 'TV-G'}},{'$match': {'runtime': {'$gt': 1}}},{'$match': {'name': {'$regex':'Ned','$options':'i'}}]")
 
 
-condition = st.text_input("condition",'[]')
+aggregate_condition = st.text_input("aggregate condition",'[]')
 
-pipeline=json.loads(condition.replace("'", '"'))
+pipeline=json.loads(aggregate_condition.replace("'", '"'))
 #pipeline=[].append({'$match': {'rated': 'TV-G'}})
 
-filter_result = col.aggregate(pipeline)
-st.write(pd.json_normalize(list(filter_result),sep='.'))
+filter_result = list(col.aggregate(pipeline))
+st.write(pd.json_normalize(filter_result,sep='.'))
 
 # st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
 #st.write(pd.DataFrame(find_docs_result))
+
+st.text('df filter example: Quantity>2 and look="ka", Name.str.contains("Pro")')
+df_condition = st.text_input("df query",'')
+st.write(docs_jn_df.query(df_condition))
+
 
 
 
