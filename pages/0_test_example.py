@@ -86,8 +86,6 @@ select_field = st.pills('field',docs_jn_df.columns.tolist())
 fig = px.histogram(docs_jn_df, x=select_field, marginal="box", title=f'Distribution of {select_field}')
 st.plotly_chart(fig, use_container_width=True)
 
-
-
 # Filter
 st.write('### Filter, Search Documents')
 
