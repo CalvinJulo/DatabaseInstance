@@ -114,8 +114,8 @@ st.write(pd.json_normalize(filter_result,sep='.'))
 # st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
 #st.write(pd.DataFrame(find_docs_result))
 
-st.text('df filter example: Quantity>2 and look="ka", Name.str.contains("Pro")')
-df_condition = st.text_input("df query",'')
+st.text('df filter example: Quantity>2 and look=="ka", Name.str.contains("Pro")')
+df_condition = st.text_input("df query",'index == index')
 st.write(docs_jn_df.query(df_condition))
 
 
