@@ -81,10 +81,17 @@ st.write('### The documents structure')
 st.dataframe(docs_des)
 st.write('### The documents description')
 st.dataframe(docs_jn_df.describe(include='all').T)
-select_field = st.pills('field',docs_jn_df.columns.tolist())
+select_field = st.pills('field',docs_jn_df.columns.tolist(),selection_mode="multi",default=None)
 
-fig = px.histogram(docs_jn_df, x=select_field, marginal="box", title=f'Distribution of {select_field}')
-st.plotly_chart(fig, use_container_width=True)
+if len(select_field)==1:
+    fig = px.histogram(docs_jn_df, x=select_field, marginal="box", title=f'Distribution of {select_field}')
+    st.plotly_chart(fig, use_container_width=True)
+elif len(select_field)==2:
+    fig = px.scatter(df, x=select_field[0], y=select_field[1], title=f'{select_field[0]} vs. {select_field[1]}', trendline="ols")
+    st.plotly_chart(fig, use_container_width=True)
+else:
+    st.write('reselect')
+
 
 # Filter
 st.write('### Filter, Search Documents')
