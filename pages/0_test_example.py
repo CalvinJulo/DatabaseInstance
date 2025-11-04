@@ -78,6 +78,9 @@ st.write('### The head documents')
 st.dataframe(docs_df.head())
 st.write('### The documents structure')
 st.dataframe(docs_des)
+st.write('### The documents description')
+st.dataframe(docs_jn_df.describe())
+
 
 # Filter
 st.write('### Filter, Search Documents')
