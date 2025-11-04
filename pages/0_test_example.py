@@ -96,7 +96,7 @@ condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','
 
 pipline=[]
 pipline.append({'$match': {'rated': 'TV-G'}})
-filter_result = client[db_name][col_name].aggregate(pipline)
+filter_result = col.aggregate(pipline)
 st.write(pd.json_normalize(list(filter_result),sep='_'))
 
 # st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
