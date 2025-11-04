@@ -24,7 +24,7 @@ from bson.json_util import dumps,loads
 from pages.common_lib import run_mongo
 import time
 import json
-import plotly.express as px
+# import plotly.express as px
 
 st.info('This is the basic intro of mongodb\n\n-- connect to Mongodb Altas\n\n-- CRUD DB, Col, Doc')
 
