@@ -84,9 +84,7 @@ st.write('### Filter, Search Documents')
 
 
 
-result = client['sample_mflix']['embedded_movies'].aggregate([
-    {'$match': {'rated': 'TV-G'}}
-])
+result = client['sample_mflix']['embedded_movies'].aggregate([{'$match': {'rated': 'TV-G'}}])
 
 st.write('kkkkkkkkk')
 st.write(pd.json_normalize(list(result),sep='_'))
@@ -96,17 +94,12 @@ st.write('ggggg')
 
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
 
-pipeline=[{'$match': {'rated': 'TV-G'}}]
-filter_result =client['sample_mflix']['embedded_movies'].aggregate([
-    {'$match': {'rated': 'TV-G'}}
-])
-st.write('filter_docs')
-st.write(filter_result)
-filter_docs_list =[filter_result]
-st.write(filter_docs_list)
-st.write(pd.json_normalize(filter_docs_list,sep='_'))
-# st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
+pipline=[]
 
+filter_result = client['sample_mflix']['embedded_movies'].aggregate([{'$match': {'rated': 'TV-G'}}])
+st.write(pd.json_normalize(list(filter_result),sep='_'))
+
+# st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
 #st.write(pd.DataFrame(find_docs_result))
 
 
