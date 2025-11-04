@@ -4,3 +4,4 @@ streamlit
 pymongo
 pandas
 json
+plotly
