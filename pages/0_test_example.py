@@ -24,6 +24,7 @@ from bson.json_util import dumps,loads
 from pages.common_lib import run_mongo
 import time
 import json
+import plotly.express as px
 
 st.info('This is the basic intro of mongodb\n\n-- connect to Mongodb Altas\n\n-- CRUD DB, Col, Doc')
 
@@ -81,6 +82,11 @@ st.dataframe(docs_des)
 st.write('### The documents description')
 st.dataframe(docs_jn_df.describe(include='all').T)
 select_field = st.pills('field',docs_jn_df.columns.tolist())
+
+fig = px.histogram(docs_jn_df, x=select_field, marginal="box", title=f'Distribution of {select_field}')
+st.plotly_chart(fig, use_container_width=True)
+
+
 
 # Filter
 st.write('### Filter, Search Documents')
