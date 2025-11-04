@@ -84,7 +84,9 @@ st.write('### Filter, Search Documents')
 
 
 
-st.text('''example: [{'$match': {'rated': 'TV-G'}}]''')
+st.text("example: [{'$match': {'rated': 'TV-G'}},{'$match': {'runtime': {'$gt': 1}}},{'$match': {'$text': {'$search':'right'}}}]")
+
+
 condition = st.text_input("condition",'[]')
 
 pipeline=json.loads(condition.replace("'", '"'))
