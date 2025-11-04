@@ -68,7 +68,8 @@ db = client[db_name]
 col = db[col_name]
 docs = get_col(db_name, col_name) # docs is a list of documents, and documents is a dict or json
 docs_df = pd.DataFrame(docs)
-docs_des = run_mongo.get_docs_df_des(docs_df)
+docs_jn_df =pd.json_normalize(docs,sep='.')
+docs_des = run_mongo.get_docs_df_des(docs_jn_df)
 docs_fields = set(key for dict_ in docs for key in dict_.keys())
 
 
@@ -85,10 +86,11 @@ st.write('### Filter, Search Documents')
 
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
 pipline=[]
-pipline.append({'$match': {'rated': 'TV-G'}})
+pipeline.append({'$match': {'rated': 'TV-G'}})
 l1= {'$limit':2}
-pipline.append(l1)
-filter_result = col.aggregate(pipline)
+pipeline.append(l1)
+st.write('pineline',f'{pineline}')
+filter_result = col.aggregate(pipeline)
 st.write(pd.json_normalize(list(filter_result),sep='.'))
 
 # st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
