@@ -83,8 +83,10 @@ st.write('### Filter, Search Documents')
 
 condition = st.multiselect('Input_Condition',['filter_1','filter_2','filter_3','search_1','search_2'])
 
-# filter_docs = col.aggregate([{"$limit": 2 } ])
-filter_docs = col.aggregate([{'$match':{ 'year' : 1966 } } ])
+filter_docs = col.aggregate([{"$limit": 2 } ])
+# filter_docs = col.aggregate([{'$match':{ 'year' : 1966 } } ])
+st.write('filter_docs')
+st.write(filter_docs)
 filter_docs_list =[filter_docs]
 st.write(pd.json_normalize(filter_docs_list,sep='_'))
 # st.write(pd.json_normalize(find_docs_result,record_path='nested_list_field',sep='_',errors='ignore'))
