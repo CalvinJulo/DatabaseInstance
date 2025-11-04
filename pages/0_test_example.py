@@ -87,11 +87,10 @@ if len(select_field)==1:
     fig = px.histogram(docs_jn_df, x=select_field, marginal="box", title=f'Distribution of {select_field}')
     st.plotly_chart(fig, use_container_width=True)
 elif len(select_field)==2:
-    st.write(select_field)
-    fig = px.scatter(docs_jn_df.fillna(''), x=select_field[0], y=select_field[1], title=f'{select_field[0]} vs. {select_field[1]}')
+    fig = px.scatter(docs_jn_df, x=select_field[0], y=select_field[1], title=f'{select_field[0]} vs. {select_field[1]}')
     st.plotly_chart(fig, use_container_width=True)
 elif len(select_field)>2:
-    fig = px.scatter_matrix(docs_jn_df.fillna(''),dimensions=select_field,title="Multivariate Relationships")
+    fig = px.scatter_matrix(docs_jn_df,dimensions=select_field,title="Multivariate Relationships")
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.write('reselect')
